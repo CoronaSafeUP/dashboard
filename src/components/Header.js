@@ -37,6 +37,11 @@ function Header() {
           </button>
         </div>
         <div className="item-center flex flex-shrink-0 justify-between space-x-6">
+          <div className="flex items-center font-semibold">
+            <span className="text-lg">This is a Staging Instance</span>
+          </div>
+        </div>
+        <div className="item-center flex flex-shrink-0 justify-between space-x-6">
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
