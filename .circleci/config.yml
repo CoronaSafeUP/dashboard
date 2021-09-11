@@ -5,8 +5,8 @@ workflows:
   build-and-publish-docker-image:
     jobs:
       - azure-acr/build-and-push-image:
-          login-server-name: coronasaferegistryup.azurecr.io
-          registry-name: coronasaferegistryup
+          login-server-name: ${LOGINSERVERNAME}
+          registry-name: ${REGISTRYNAME}
           repo: dashboard
           tag: latest
           
