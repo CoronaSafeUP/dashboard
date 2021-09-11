@@ -40,5 +40,7 @@ workflows:
           tag: latest
       - aks_deployment:
           cluster-name: ${CLUSTER}
+          requires: 
+            - azure-acr/build-and-push-image
 
           
