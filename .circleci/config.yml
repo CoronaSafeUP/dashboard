@@ -25,9 +25,9 @@ jobs:
             pwd
             ENV_IMAGE_NAME=${LOGINSERVERNAME}/${REPO}:latest
 
-            kubectl apply -f ${HOME}/project/infra/service.yaml -f ${HOME}/project/infra/hpa.yml -f ${HOME}/project/infra/config.yml 
+            kubectl apply -f ${HOME}/project/infra/service.yml -f ${HOME}/project/infra/hpa.yml -f ${HOME}/project/infra/config.yml 
      
-            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA/$CIRCLE_SHA1/g" ${HOME}/project/infra/deployment.yaml | kubectl apply  -f -     
+            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA/$CIRCLE_SHA1/g" ${HOME}/project/infra/deployment.yml | kubectl apply  -f -     
             
           name: Deploy container
 workflows:
