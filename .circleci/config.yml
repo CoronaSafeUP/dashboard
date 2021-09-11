@@ -21,6 +21,8 @@ jobs:
           resource-group: ${AZURERESOURCEGROUP}
       - run:
           command: |
+            ls
+            pwd
             ENV_IMAGE_NAME=${LOGINSERVERNAME}/${REPO}:latest
 
             kubectl apply -f ${HOME}/project/infra/service.yaml -f ${HOME}/project/infra/hpa.yml -f ${HOME}/project/infra/config.yml 
