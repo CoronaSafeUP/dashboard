@@ -1,12 +1,42 @@
 version: 2.1
 orbs:
   azure-acr: circleci/azure-acr@0.2.0
+  azure-aks: circleci/azure-aks@0.3.0
+  kubernetes: circleci/kubernetes@0.11.2
+jobs:
+  aks_deployment:
+    executor: azure-aks/default
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+      
+    steps:
+      - checkout 
+      - azure-aks/update-kubeconfig-with-credentials:
+          cluster-name: << parameters.cluster-name >>
+          install-kubectl: true
+          perform-login: true
+          resource-group: ${AZURERESOURCEGROUP}
+      - run:
+          command: |
+            ENV_IMAGE_NAME=${LOGINSERVERNAME}/${REPO}:latest
+
+            kubectl apply -f ${HOME}/project/infra/service.yaml -f ${HOME}/project/infra/hpa.yml -f ${HOME}/project/infra/config.yml 
+     
+            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA/$CIRCLE_SHA1/g" ${HOME}/project/infra/deployment.yaml | kubectl apply  -f -     
+            
+          name: Deploy container
 workflows:
   build-and-publish-docker-image:
     jobs:
       - azure-acr/build-and-push-image:
           login-server-name: ${LOGINSERVERNAME}
           registry-name: ${REGISTRYNAME}
-          repo: dashboard
+          repo: ${REPO}
           tag: latest
+      - aks_deployment:
+          cluster-name: ${CLUSTER}
+
           
