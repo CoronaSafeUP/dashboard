@@ -3,7 +3,7 @@ export const ACTIVATED_DISTRICTS = [
   { id: 24, name: "Ballia", lat: 25.764_449_7, lng: 84.131_611_6, zoom: 10 },
 ];
 
-export const GMAP_KEY = "AIzaSyAVzl1ZADksuo7SDod7lPGkvfTyrdGk2Ew";
+export const GMAP_KEY = "AIzaSyDrLwDGOcxnVqrk7OY6MRQqjuov47ukgXs";
 
 export const AVAILABILITY_TYPES_ORDERED = [
   1, 150, 10, 20, 30, 120, 110, 100, 40, 60, 50, 70,
